@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>Message sender</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
+    <script src="events.js"></script>
+	<script src="sender.js"></script>
+</head>
+<body onload="getCookies()" >
+
+<form onsubmit="return validate()" action="javascript:nn()">
+<label>Email</label >
+<label id="response" ></label>
+ <input type="text" id="email" >
+ <label>Message</label>
+ <textarea id="message"  ></textarea>
+ <input type="submit" value="Send"  >
+</form>
+
+</body>
+</html>
+	

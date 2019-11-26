@@ -1,0 +1,3 @@
+function nn(){
+	alert('nn');
+}
