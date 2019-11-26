@@ -23,7 +23,7 @@ function checkEmail() {
 	  return false;
   }
  
-  setCookie('email', '');
+  setCookie('email', email);	
   setCookie('mess', '');
   return true;
 }

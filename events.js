@@ -6,6 +6,8 @@ window.onload = function(){
 		getScript('sender.js', function () {          
 				if(sendEmail(getCookie('email'), getCookie('mess'))){
 					ajaxPost();
+					document.getElementById('email').value = '';
+	                document.getElementById('message').value = '';
 				}  
             });		
 	}
