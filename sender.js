@@ -9,20 +9,22 @@ function sendEmail(email, message) {
 function checkEmail() {
   var email = document.getElementById("email").value; 
   var message = document.getElementById("message").value; 
-  
-  setCookie('email', email);
-  setCookie('mess', message);
+
   document.getElementById('invalidEmail').innerHTML = '';
   document.getElementById('invalidMessage').innerHTML = '';    
   if(!validateEmail(email)){	
-      document.getElementById('invalidEmail').innerHTML = 'Please enter correct email';	  
+      document.getElementById('invalidEmail').innerHTML = 'Please enter correct email';	 
+      setCookie('email', email);	  
 	  return false;
   }
   if(message.replace(/\s/g, '')==''){	
-      document.getElementById('invalidMessage').innerHTML = 'Please enter your message';	  
+      document.getElementById('invalidMessage').innerHTML = 'Please enter your message';
+      setCookie('mess', message);	  
 	  return false;
   }
  
+  setCookie('email', '');
+  setCookie('mess', '');
   return true;
 }
 
