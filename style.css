@@ -1,0 +1,17 @@
+.container *{
+	display: block;
+
+}
+
+.danger{
+	color: red;
+}
+
+#email{
+	width: 60%;
+}
+
+#message{
+	height: 10em;
+	width: 100%;
+}

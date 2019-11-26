@@ -5,19 +5,21 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="style.css" type="text/css" />
-    <script src="events.js"></script>
-	<script src="sender.js"></script>
-</head>
-<body onload="getCookies()" >
+    <script type="text/javascript"  src="events.js"></script>
+	<script type="text/javascript"  src="sender.js"></script>
 
-<form onsubmit="return validate()" action="javascript:nn()">
+</head>
+<body >
+
+<div class="container">
 <label>Email</label >
-<label id="response" ></label>
+<div id="invalidEmail" class="danger" ></div>
  <input type="text" id="email" >
- <label>Message</label>
+ <div >Message</div>
+ <div id="invalidMessage" class="danger" ></div>
  <textarea id="message"  ></textarea>
- <input type="submit" value="Send"  >
-</form>
+ <input type="button" value="Send" id="send">
+</div>
 
 </body>
 </html>

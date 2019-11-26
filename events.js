@@ -1,33 +1,39 @@
-function validate() {
-  var email = document.getElementById("email").value; 
-  var message = document.getElementById("message").value; 
-  if(!validateEmail(email)){
-      setCookie('email', email);
-      setCookie('mess', message);	
-      document.getElementById('response').innerHTML = 'Please enter correct email';	  
-	  return false;
-  }
-
-  setCookie('email', email);
-  setCookie('mess', message);
-   
-  return true;
-}
-
-
-function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
-
-function getCookies(){
-	
+window.onload = function(){
+		
 	document.getElementById('email').value = getCookie('email');
 	document.getElementById('message').value = getCookie('mess');
+	document.querySelector('#send').onclick = function() {
+		getScript('sender.js', function () {          
+				if(sendEmail(getCookie('email'), getCookie('mess'))){
+					ajaxPost();
+				}  
+            });		
+	}
 }
 
-function setCookie(cname, cvalue) {
-  document.cookie = encodeURIComponent(cname) + "=" + encodeURIComponent(cvalue) + ";" + "path=/";
+
+function ajaxPost(){
+	var request = new XMLHttpRequest();
+	
+	request.open('POST', 'sender.json');
+	
+    request.setRequestHeader('Content-Type', 'application/json');
+	request.responseType="json";
+	
+	request.send();
+	request.onreadystatechange=function()
+	{
+	  if(request.readyState==4 && request.status==200)
+	  {
+		  var res = JSON.parse(JSON.stringify(request.response));
+		  if(res.result)
+		  {
+			  alert('You sent a message to ' + getCookie('email'));
+		  }
+		 
+	  }
+		
+	}
 }
 
 function getCookie(cname) {
@@ -44,4 +50,23 @@ function getCookie(cname) {
     }
   }
   return "";
+}
+
+
+function getScript(source, callback) {
+    var script = document.createElement('script');
+    var prior = document.getElementsByTagName('script')[0];
+    script.async = 1;
+
+    script.onload = script.onreadystatechange = function( _, isAbort ) {
+        if(isAbort || !script.readyState || /loaded|complete/.test(script.readyState) ) {
+            script.onload = script.onreadystatechange = null;
+            script = undefined;
+
+            if(!isAbort && callback) setTimeout(callback, 0);
+        }
+    };
+
+    script.src = source;
+    prior.parentNode.insertBefore(script, prior);
 }
