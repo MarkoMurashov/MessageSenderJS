@@ -17,6 +17,7 @@ function ajaxPost(){
 	
 	request.open('POST', 'sender.json');
 	
+	request.withCredentials = true;
     request.setRequestHeader('Content-Type', 'application/json');
 	request.responseType="json";
 	

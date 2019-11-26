@@ -11,18 +11,18 @@ function checkEmail() {
   var message = document.getElementById("message").value; 
   
   setCookie('email', email);
-  setCookie('mess', message);	
+  setCookie('mess', message);
+  document.getElementById('invalidEmail').innerHTML = '';
+  document.getElementById('invalidMessage').innerHTML = '';    
   if(!validateEmail(email)){	
       document.getElementById('invalidEmail').innerHTML = 'Please enter correct email';	  
 	  return false;
   }
-  document.getElementById('invalidEmail').innerHTML = '';
   if(message.replace(/\s/g, '')==''){	
       document.getElementById('invalidMessage').innerHTML = 'Please enter your message';	  
 	  return false;
   }
-  document.getElementById('invalidMessage').innerHTML = '';  
-  
+ 
   return true;
 }
 
@@ -35,5 +35,8 @@ function validateEmail(email) {
 
 
 function setCookie(cname, cvalue) {
-  document.cookie = encodeURIComponent(cname) + "=" + encodeURIComponent(cvalue) + ";" + "path=/";
+  var d = new Date();
+  d.setTime(d.getTime() + (100*24*60*60*1000));
+ var expires = "expires="+ d.toUTCString();
+  document.cookie = encodeURIComponent(cname) + "=" + encodeURIComponent(cvalue) + ";" + expires + ";path=/";
 }
